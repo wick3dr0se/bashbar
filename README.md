@@ -21,7 +21,7 @@ $ git clone https://github.com/wick3dr0se/bashbar; cd bashbar
 
 ## Usage
 ```bash
-bashbar <percent> [delay]
+$ bashbar <percent> [delay]
 ```
 
 Legend
