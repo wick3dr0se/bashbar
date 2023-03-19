@@ -2,19 +2,17 @@
 
 set -eEuo pipefail
 
+(( $1 > 100 ))&&{ printf 'Enter an integer from 1-100 (percent)\n'; exit 1; }
+
 shopt -s checkwinsize; (:;:)
 
-sleep "${2:-.2}"
-((total=COLUMNS-4))
-((progress=$1*total/100))
+sleep "${2:-0}"
+((width=COLUMNS-4)); ((progress=$1*width/100))
 
-if (( $1 > 68 )); then
-  color=2
-elif (( $1 > 34 )); then
-  color=3
-fi
+if (( $1 > 68 )); then color=2
+elif (( $1 > 34 )); then color=3; fi
 
 printf '\r|\e[4%dm%*s\e[m' "${color:-1}" "$progress"
-printf '\e[%dG|%d%%' "$total" "$1"
+printf '\e[%dG|%d%%' "$width" "$1"
 
 (( $1 == 100 ))&& printf '\n'
