@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-set -eu
+[[ "$1" =~ ^[1-9][0-9]0?$ ]] || { echo 'Enter an integer from 1-100 (percent)'; exit 1; }
 
-(( $1 > 100 )) && { echo 'Enter an integer from 1-100 (percent)'; exit 1; }
+set -eu
 
 shopt -s checkwinsize; (:;:)
 
