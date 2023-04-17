@@ -7,7 +7,9 @@ set -eu
 shopt -s checkwinsize; (:;:)
 
 sleep "${2:-0}"
-((width=COLUMNS-4)); ((progress=$1*width/100))
+
+((width=COLUMNS-4))
+((progress=$1*width/100))
 
 if (( $1 > 68 )); then
     color=2
