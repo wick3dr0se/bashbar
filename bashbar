@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-set -eu
+(( $# )) || { printf 'Expected at least one argument\n'; exit 1; }
 
-(( $1 > 100 )) && { printf 'Enter an integer from 1-100 (percent)\n'; exit 1; }
+(( $1 >= 1 && $1 <= 100 )) || { printf 'Enter an integer from 1-100 (percent)\n'; exit 1; }
 
 shopt -s checkwinsize; (:;:)
 
