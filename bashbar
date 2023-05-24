@@ -1,18 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -eEuo pipefail
+(( $# )) || { printf 'Expected at least one argument\n'; exit 1; }
 
-(( $1 > 100 ))&&{ printf 'Enter an integer from 1-100 (percent)\n'; exit 1; }
+(( $1 >= 1 && $1 <= 100 )) || { printf 'Enter an integer from 1-100 (percent)\n'; exit 1; }
 
 shopt -s checkwinsize; (:;:)
 
 sleep "${2:-0}"
-((width=COLUMNS-4)); ((progress=$1*width/100))
 
-if (( $1 > 68 )); then color=2
-elif (( $1 > 34 )); then color=3; fi
+((width=COLUMNS-4))
+((progress=$1*width/100))
 
-printf '\r|\e[4%dm%*s\e[m' "${color:-1}" "$progress"
-printf '\e[%dG|%d%%' "$width" "$1"
+if (( $1 > 68 )); then
+    color=2
+elif (( $1 > 34 )); then
+    color=3
+fi
 
-(( $1 == 100 ))&& printf '\n'
+printf '\r|\e[4%dm%*s\e[m' "${color:-1}" "${progress}"
+printf '\e[%dG|%d%%' "${width}" "$1"
+
+(( $1 == 100 )) && printf '\n'
